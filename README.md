@@ -1,3 +1,9 @@
+# CM CDK
+
+## CDK でやること
+
+- [Guard Duty の内容を Slack に通知する](./lib/SecurityAlertChatbot.ts)
+
 ## CDK とは別でやること
 
 ### 全リージョンの Security Hub を eneble にする
