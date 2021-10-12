@@ -56,42 +56,6 @@ Object {
       },
       "Type": "AWS::SNS::TopicPolicy",
     },
-    "SlackChannelConfigurationC73E0866": Object {
-      "Properties": Object {
-        "ConfigurationName": "SecurityAlert",
-        "IamRoleArn": Object {
-          "Fn::GetAtt": Array [
-            "SlackChannelConfigurationConfigurationRole066766EC",
-            "Arn",
-          ],
-        },
-        "SlackChannelId": "test-slackChannelId",
-        "SlackWorkspaceId": "test-slackWorkspaceId",
-        "SnsTopicArns": Array [
-          Object {
-            "Ref": "GuardDutyTopic003A9A5B",
-          },
-        ],
-      },
-      "Type": "AWS::Chatbot::SlackChannelConfiguration",
-    },
-    "SlackChannelConfigurationConfigurationRole066766EC": Object {
-      "Properties": Object {
-        "AssumeRolePolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": "sts:AssumeRole",
-              "Effect": "Allow",
-              "Principal": Object {
-                "Service": "chatbot.amazonaws.com",
-              },
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-      },
-      "Type": "AWS::IAM::Role",
-    },
   },
 }
 `;

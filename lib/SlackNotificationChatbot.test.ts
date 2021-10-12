@@ -1,16 +1,17 @@
 import { SynthUtils } from "@aws-cdk/assert";
-import { App, Stack, aws_sns as sns } from "aws-cdk-lib";
-import { SecurityAlertChatbot } from "./SecurityAlertChatbot";
+import { App, Stack, aws_sns } from "aws-cdk-lib";
+import { SlackNotificationChatbot } from "./SlackNotificationChatbot";
 
 test("snapshot test", () => {
   const app = new App();
   const stack = new Stack(app, "testStack");
 
-  const topic = new sns.Topic(stack, "test-Topic");
+  const topic = new aws_sns.Topic(stack, "test-Topic");
 
-  const target = new SecurityAlertChatbot(app, "Target", {
+  const target = new SlackNotificationChatbot(app, "Target", {
     slackWorkspaceId: "test-slackWorkspaceId",
     slackChannelId: "test-slackChannelId",
+    topics: [topic],
   });
 
   expect(SynthUtils.toCloudFormation(target)).toMatchSnapshot();

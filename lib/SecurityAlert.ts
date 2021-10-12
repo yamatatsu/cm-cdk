@@ -2,19 +2,15 @@ import {
   App,
   Stack,
   StackProps,
-  aws_chatbot,
   aws_sns,
   aws_events_targets,
   aws_events,
 } from "aws-cdk-lib";
 
-type Props = StackProps & {
-  slackWorkspaceId: string;
-  slackChannelId: string;
-};
+export class SecurityAlert extends Stack {
+  public readonly topic: aws_sns.ITopic;
 
-export class SecurityAlertChatbot extends Stack {
-  constructor(scope: App, id: string, props: Props) {
+  constructor(scope: App, id: string, props?: StackProps) {
     super(scope, id, props);
 
     const topic = new aws_sns.Topic(this, "GuardDutyTopic");
@@ -29,15 +25,6 @@ export class SecurityAlertChatbot extends Stack {
     });
     rule.addTarget(new aws_events_targets.SnsTopic(topic));
 
-    new aws_chatbot.SlackChannelConfiguration(
-      this,
-      "SlackChannelConfiguration",
-      {
-        slackChannelConfigurationName: "SecurityAlert",
-        slackWorkspaceId: props.slackWorkspaceId,
-        slackChannelId: props.slackChannelId,
-        notificationTopics: [topic],
-      }
-    );
+    this.topic = topic;
   }
 }
