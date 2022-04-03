@@ -1,6 +1,6 @@
 import { SynthUtils } from "@aws-cdk/assert";
 import { App, Stack, aws_sns } from "aws-cdk-lib";
-import { SlackNotificationChatbot } from "./SlackNotificationChatbot";
+import { Chatbot } from "./chatbot";
 
 test("snapshot test", () => {
   const app = new App();
@@ -8,7 +8,7 @@ test("snapshot test", () => {
 
   const topic = new aws_sns.Topic(stack, "test-Topic");
 
-  const target = new SlackNotificationChatbot(app, "Target", {
+  const target = new Chatbot(app, "Target", {
     slackWorkspaceId: "test-slackWorkspaceId",
     slackChannelId: "test-slackChannelId",
     topics: [topic],

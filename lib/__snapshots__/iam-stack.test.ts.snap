@@ -1,0 +1,112 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`snapshot test 1`] = `
+Object {
+  "Resources": Object {
+    "AdminGroupCD52047A": Object {
+      "Properties": Object {
+        "GroupName": "AdminGroup",
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/ReadOnlyAccess",
+              ],
+            ],
+          },
+          Object {
+            "Ref": "ForceMfaPolicyD91A0C36",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Group",
+    },
+    "AdminRole38563C57": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "AWS": Object {
+                  "Fn::Join": Array [
+                    "",
+                    Array [
+                      "arn:",
+                      Object {
+                        "Ref": "AWS::Partition",
+                      },
+                      ":iam::",
+                      Object {
+                        "Ref": "AWS::AccountId",
+                      },
+                      ":user/test-personalMachineUserName",
+                    ],
+                  ],
+                },
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/AdministratorAccess",
+              ],
+            ],
+          },
+        ],
+        "RoleName": "AdminRole",
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "ForceMfaPolicyD91A0C36": Object {
+      "Properties": Object {
+        "Description": "",
+        "ManagedPolicyName": "ForceMfaPolicy",
+        "Path": "/",
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Condition": Object {
+                "BoolIfExists": Object {
+                  "aws:MultiFactorAuthPresent": "false",
+                },
+              },
+              "Effect": "Deny",
+              "NotAction": "iam:*",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+      },
+      "Type": "AWS::IAM::ManagedPolicy",
+    },
+    "testpersonalMachineUserNameGroup0": Object {
+      "Properties": Object {
+        "GroupName": Object {
+          "Ref": "AdminGroupCD52047A",
+        },
+        "Users": Array [
+          "test-personalMachineUserName",
+        ],
+      },
+      "Type": "AWS::IAM::UserToGroupAddition",
+    },
+  },
+}
+`;

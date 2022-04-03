@@ -1,10 +1,15 @@
 import * as cdk from "aws-cdk-lib";
 import * as iam from "aws-cdk-lib/aws-iam";
-import { PERSONAL_MACHINE_USER_NAME } from "./consts";
+
+type Props = cdk.StackProps & {
+  personalMachineUserName: string;
+};
 
 export class IamStack extends cdk.Stack {
-  constructor(parent: cdk.App, id: string, props?: cdk.StackProps) {
+  constructor(parent: cdk.App, id: string, props: Props) {
     super(parent, id, props);
+
+    const { personalMachineUserName } = props;
 
     const forceMfaPolicy = new iam.ManagedPolicy(this, "ForceMfaPolicy", {
       managedPolicyName: "ForceMfaPolicy",
@@ -33,7 +38,7 @@ export class IamStack extends cdk.Stack {
     const user = iam.User.fromUserName(
       this,
       "SoloUser",
-      PERSONAL_MACHINE_USER_NAME
+      personalMachineUserName
     );
 
     user.addToGroup(adminGroup);

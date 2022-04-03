@@ -1,6 +1,6 @@
 import { SynthUtils } from "@aws-cdk/assert";
 import { App } from "aws-cdk-lib";
-import { SecurityAlert } from "./SecurityAlert";
+import { SecurityAlert } from "./security-alert";
 
 test("snapshot test", () => {
   const app = new App();

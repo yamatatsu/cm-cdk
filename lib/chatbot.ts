@@ -6,7 +6,7 @@ type Props = StackProps & {
   topics: aws_sns.ITopic[];
 };
 
-export class SlackNotificationChatbot extends Stack {
+export class Chatbot extends Stack {
   constructor(scope: App, id: string, props: Props) {
     super(scope, id, props);
 
