@@ -1,1 +1,1 @@
-{ "app": "node -r dotenv/config -r esbuild-register bin/index.ts" }
+{ "app": "node -r dotenv/config -r esbuild-register bin/app.ts" }
